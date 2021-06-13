@@ -1,7 +1,14 @@
 package main
 
 import (
-  "github.com/vroomy/vroomy"
+	"context"
+	"log"
+
+	"github.com/hatchify/closer"
+	"github.com/vroomy/vroomy"
+
+	_ "github.com/vroomy-ext/fileserver-plugin"
+	_ "github.com/vroomy-ext/jump-plugin"
 )
 
 func main() {

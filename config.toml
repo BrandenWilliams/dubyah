@@ -1,0 +1,13 @@
+name = "dubyah"
+port = 80
+# TODO: Un-comment this once live
+#tlsPort = 443 
+#tlsDir = "./tls"
+
+plugins = [
+	"github.com/vroomy-ext/jump-plugin@v0.10.20 as jump",
+]
+
+include = [
+	"./routes/pages.toml",
+]
