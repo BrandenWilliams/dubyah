@@ -6,6 +6,9 @@ port = 80
 
 plugins = [
 	"github.com/vroomy-ext/jump-plugin@v0.10.20 as jump",
+
+	"github.com/BrandenWilliams/dubyah/plugins/templates",
+	"github.com/BrandenWilliams/dubyah/plugins/pages",
 ]
 
 include = [

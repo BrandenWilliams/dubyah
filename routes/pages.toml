@@ -1,0 +1,3 @@
+[[route]]
+httpPath = "/"
+target = "./public_html/index.html"

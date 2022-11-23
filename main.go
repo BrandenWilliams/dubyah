@@ -7,8 +7,13 @@ import (
 	"github.com/hatchify/closer"
 	"github.com/vroomy/vroomy"
 
+	// External plugins
 	_ "github.com/vroomy-ext/fileserver-plugin"
 	_ "github.com/vroomy-ext/jump-plugin"
+
+	// Internal plugins
+	_ "github.com/BrandenWilliams/dubyah/plugins/pages"
+	_ "github.com/BrandenWilliams/dubyah/plugins/templates"
 )
 
 func main() {
