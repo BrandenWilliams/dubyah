@@ -27,7 +27,12 @@ func init() {
 }
 
 // Init is called by vroomy during the plugin initialization pass
-func (p *Plugin) Load(env map[string]string) (err error) {
+func (p *Plugin) Load(env vroomy.Environment) (err error) {
 	p.templates = templates.New()
 	return
+}
+
+// Backend exposes this plugin's data layer to other plugins
+func (p *Plugin) Backend() interface{} {
+	return p.templates
 }

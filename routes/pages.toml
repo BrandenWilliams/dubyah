@@ -1,3 +1,6 @@
 [[route]]
+method = "GET"
 httpPath = "/"
-target = "./public_html/index.html"
+handlers = [
+	"pages.Homepage",
+]

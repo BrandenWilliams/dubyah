@@ -8,8 +8,9 @@ import (
 	"github.com/vroomy/vroomy"
 
 	// External plugins
-	_ "github.com/vroomy-ext/fileserver-plugin"
-	_ "github.com/vroomy-ext/jump-plugin"
+	// _ "github.com/vroomy-ext/fileserver-plugin"
+	// _ "github.com/vroomy-ext/jump-plugin"
+	// _ "github.com/vroomy-ext/mojura-opts-plugin"
 
 	// Internal plugins
 	_ "github.com/BrandenWilliams/dubyah/plugins/pages"
