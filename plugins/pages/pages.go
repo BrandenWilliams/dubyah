@@ -2,6 +2,6 @@ package plugin
 
 import "github.com/hoisie/mustache"
 
-type Pages struct {
+type pages struct {
 	homepage mustache.Template
 }
