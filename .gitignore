@@ -1,0 +1,8 @@
+dubyah
+DS_Store
+data
+public_html/css
+public_html/.DS_Stores
+*.bdb
+*.idb
+*.log
