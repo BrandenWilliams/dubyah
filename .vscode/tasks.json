@@ -1,0 +1,17 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run server",
+            "type": "shell",
+            "command": "./dubyah",
+            "problemMatcher": []
+        },
+        {
+            "label": "SCSS build and watch",
+            "type": "shell",
+            "command": "sass ./private_html/scss/style.scss:./public_html/css/style.css --watch",
+            "problemMatcher": []
+        },
+    ]
+}
