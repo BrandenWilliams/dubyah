@@ -1,0 +1,29 @@
+# Private Assets
+[[group]]
+name = "private"
+#group = "private"
+httpPath = "/"
+handlers = [ 
+   "jump.SetUserMW(true)",
+]
+
+# Public Assets
+[[group]]
+name = "public"
+httpPath = "/"
+
+[[route]]
+method = "GET"
+group = "public"
+httpPath = "/signup"
+handlers = [
+	"auth.SignUp",
+]
+
+[[route]]
+method = "GET"
+group = "public"
+httpPath = "/login"
+handlers = [
+	"auth.LoginPage",
+]
