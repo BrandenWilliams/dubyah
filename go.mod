@@ -3,9 +3,11 @@ module github.com/BrandenWilliams/dubyah
 go 1.19
 
 require (
+	github.com/gdbu/jump v0.19.0
 	github.com/gdbu/poller v0.4.92
 	github.com/gdbu/scribe v0.5.3
 	github.com/hatchify/closer v0.4.81
+	github.com/hatchify/errors v0.4.82
 	github.com/hoisie/mustache v0.0.0-20160804235033-6375acf62c69
 	github.com/mojura/kiroku v0.9.8
 	github.com/vroomy-ext/fileserver-plugin v0.4.0
@@ -23,7 +25,6 @@ require (
 	github.com/gdbu/emailvalidator v0.5.0 // indirect
 	github.com/gdbu/filecacher v0.4.93 // indirect
 	github.com/gdbu/fileserver v0.6.0 // indirect
-	github.com/gdbu/jump v0.19.0 // indirect
 	github.com/gdbu/queue v0.4.81 // indirect
 	github.com/gdbu/reflectio v0.1.3 // indirect
 	github.com/gdbu/stopwatch v0.5.0 // indirect
@@ -32,7 +33,6 @@ require (
 	github.com/hatchify/atoms v0.4.79 // indirect
 	github.com/hatchify/colors v0.4.79 // indirect
 	github.com/hatchify/cron v0.4.82 // indirect
-	github.com/hatchify/errors v0.4.82 // indirect
 	github.com/mojura-backends/bolt v0.2.1 // indirect
 	github.com/mojura/backend v0.2.1 // indirect
 	github.com/mojura/enkodo v0.5.6 // indirect
