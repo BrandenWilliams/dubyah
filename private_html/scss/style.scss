@@ -1,0 +1,29 @@
+// Global Import
+@import "colors";
+@import "fonts";
+@import "screens";
+@import "global";
+
+//Common Element Import
+@import "common/htag";
+@import "common/ptag";
+@import "common/atag";
+@import "common/button";
+@import "common/footer";
+@import "common/header";
+@import "common/label";
+
+// Pages Import
+@import "pages/homepage";
+@import "pages/techsupport";
+@import "pages/stackshowcase";
+@import "pages/websites";
+@import "pages/resume";
+
+wrap {
+	max-width: 1280px;
+	// width: 1096px;
+	display: block;
+	position: relative;
+	margin: 0 auto;
+}
