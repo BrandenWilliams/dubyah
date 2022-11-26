@@ -10,7 +10,6 @@ require (
 	github.com/vroomy-ext/digitalocean-s3-plugin v0.3.2
 	github.com/vroomy-ext/fileserver-plugin v0.4.0
 	github.com/vroomy-ext/jump-plugin v0.19.0
-	github.com/vroomy-ext/mojura-opts-plugin v0.2.0
 	github.com/vroomy/common v0.6.0
 	github.com/vroomy/vroomy v0.13.3
 )
