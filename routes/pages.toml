@@ -4,3 +4,31 @@ httpPath = "/"
 handlers = [
 	"pages.Homepage",
 ]
+
+[[route]]
+method = "GET"
+httpPath = "/TechSupport"
+handlers = [
+	"pages.TechSupport",
+]
+
+[[route]]
+method = "GET"
+httpPath = "/StackShowcase"
+handlers = [
+	"pages.StackShowcase",
+]
+
+[[route]]
+method = "GET"
+httpPath = "/Websites"
+handlers = [
+	"pages.Websites",
+]
+
+[[route]]
+method = "GET"
+httpPath = "/Resume"
+handlers = [
+	"pages.Resume",
+]

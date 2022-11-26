@@ -1,0 +1,5 @@
+[[route]]
+httpPath = "/static/*"
+handlers = [
+	"fileserver.ServeFile(./public_html,/static)",
+]
