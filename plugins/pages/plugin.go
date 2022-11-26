@@ -47,11 +47,15 @@ func (p *Plugin) Load(env vroomy.Environment) (err error) {
 		return
 	}
 
-	if err = p.Templates.ParseAndWatchTemplate("stackshowcase", &p.pages.StackShowcase); err != nil {
+	if err = p.Templates.ParseAndWatchTemplate("taskManagement", &p.pages.TaskManagement); err != nil {
 		return
 	}
 
 	if err = p.Templates.ParseAndWatchTemplate("resume", &p.pages.Resume); err != nil {
+		return
+	}
+
+	if err = p.Templates.ParseAndWatchTemplate("404", &p.pages.NotFound); err != nil {
 		return
 	}
 
@@ -83,10 +87,10 @@ func (p *Plugin) Websites(ctx common.Context) {
 }
 
 // Homepage is the handler for serving the homepage
-func (p *Plugin) StackShowcase(ctx common.Context) {
+func (p *Plugin) TaskManagement(ctx common.Context) {
 	p.CoreData.PageTitle = "Stack Show Case"
 
-	rendered := p.pages.StackShowcase.Render(p.CoreData)
+	rendered := p.pages.TaskManagement.Render(p.CoreData)
 	ctx.WriteString(200, "text/html", rendered)
 }
 
@@ -95,5 +99,13 @@ func (p *Plugin) Resume(ctx common.Context) {
 	p.CoreData.PageTitle = "Resume"
 
 	rendered := p.pages.Resume.Render(p.CoreData)
+	ctx.WriteString(200, "text/html", rendered)
+}
+
+// Homepage is the handler for serving the homepage
+func (p *Plugin) NotFound(ctx common.Context) {
+	p.CoreData.PageTitle = "Resume"
+
+	rendered := p.pages.NotFound.Render(p.CoreData)
 	ctx.WriteString(200, "text/html", rendered)
 }

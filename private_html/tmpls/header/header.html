@@ -1,4 +1,17 @@
-<logo-title>
-    <logo>LOGO HERE</logo>
-</logo-title>
-{{>menu.html}}
+<header>
+    <header-container>
+        <logo-container>
+            <logo>LOGO HERE</logo>
+        </logo-container>
+        <login-container>
+            {{#IsLoggedIn}}
+            <a href="">logout</a>
+            {{/IsLoggedIn}}
+            {{^IsLoggedIn}}
+            <a href="">login</a>
+            <a href="">sign up</a>
+            {{/IsLoggedIn}}
+        </login-container>
+    </header-container>
+    {{>menu.html}}
+</header>

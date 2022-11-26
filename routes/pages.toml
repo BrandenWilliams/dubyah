@@ -14,9 +14,9 @@ handlers = [
 
 [[route]]
 method = "GET"
-httpPath = "/StackShowcase"
+httpPath = "/TaskManagement"
 handlers = [
-	"pages.StackShowcase",
+	"pages.TaskManagement",
 ]
 
 [[route]]

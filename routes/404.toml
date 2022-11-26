@@ -1,0 +1,7 @@
+# 404 not found
+[[route]]
+httpPath = "/*"
+handlers = [
+"jump.SetUserMW(false,true)",
+"pages.NotFound",
+]
