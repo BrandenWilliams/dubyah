@@ -1,9 +1,8 @@
-module github.com/dubyah
+module github.com/BrandenWilliams/dubyah
 
 go 1.19
 
 require (
-	github.com/BrandenWilliams/dubyah v0.0.0-20221123220356-5ed240bae1eb
 	github.com/gdbu/poller v0.4.92
 	github.com/gdbu/scribe v0.5.3
 	github.com/hatchify/closer v0.4.81
@@ -22,7 +21,6 @@ require (
 	github.com/edsrzf/mmap-go v1.0.0 // indirect
 	github.com/gdbu/atoms v1.0.1 // indirect
 	github.com/gdbu/bolt v1.4.0 // indirect
-	github.com/gdbu/bst v0.2.0 // indirect
 	github.com/gdbu/emailvalidator v0.5.0 // indirect
 	github.com/gdbu/filecacher v0.4.93 // indirect
 	github.com/gdbu/fileserver v0.6.0 // indirect
@@ -30,7 +28,7 @@ require (
 	github.com/gdbu/queue v0.4.81 // indirect
 	github.com/gdbu/reflectio v0.1.3 // indirect
 	github.com/gdbu/stopwatch v0.5.0 // indirect
-	github.com/gdbu/stringset v0.2.0 // indirect
+	github.com/gdbu/stringset v0.1.7 // indirect
 	github.com/gdbu/uuid v0.1.0 // indirect
 	github.com/hatchify/atoms v0.4.79 // indirect
 	github.com/hatchify/colors v0.4.79 // indirect
