@@ -7,8 +7,10 @@ require (
 	github.com/gdbu/scribe v0.5.3
 	github.com/hatchify/closer v0.4.81
 	github.com/hoisie/mustache v0.0.0-20160804235033-6375acf62c69
+	github.com/mojura/kiroku v0.9.8
 	github.com/vroomy-ext/fileserver-plugin v0.4.0
 	github.com/vroomy-ext/jump-plugin v0.19.0
+	github.com/vroomy-ext/mojura-opts-plugin v0.2.0
 	github.com/vroomy/common v0.6.0
 	github.com/vroomy/vroomy v0.13.3
 )
@@ -34,7 +36,6 @@ require (
 	github.com/mojura-backends/bolt v0.2.1 // indirect
 	github.com/mojura/backend v0.2.1 // indirect
 	github.com/mojura/enkodo v0.5.6 // indirect
-	github.com/mojura/kiroku v0.9.8 // indirect
 	github.com/mojura/mojura v0.15.0 // indirect
 	github.com/vroomy/config v0.4.1 // indirect
 	github.com/vroomy/httpserve v0.8.2 // indirect
