@@ -1,8 +1,17 @@
 <html>
+{{>head/head.html}}
+{{>header/header.html}}
 
 <body>
-    <p>test</p>
-    {{>helloworld.html}}
+    <wrap>
+        <img src="/static/images/one.png">
+        <p>{{>homepage/techSupport.html}}</p>
+        <p>{{>homepage/stackShowcase.html}}</p>
+        <p>{{>homepage/websites.html}}</p>
+        <p>{{>homepage/techSupport.html}}</p>
+    </wrap>
 </body>
+
+{{>footer/footer.html}}
 
 </html>
