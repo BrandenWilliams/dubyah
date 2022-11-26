@@ -15,3 +15,6 @@ include = [
 	"./routes/pages.toml",
 	"./routes/assets.toml",
 ]
+
+[env]
+mojura-sync-mode = "development"
