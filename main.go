@@ -8,7 +8,6 @@ import (
 	"github.com/vroomy/vroomy"
 
 	// External plugins
-	_ "github.com/vroomy-ext/digitalocean-s3-plugin"
 	_ "github.com/vroomy-ext/fileserver-plugin"
 	_ "github.com/vroomy-ext/jump-plugin"
 
