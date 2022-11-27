@@ -1,6 +1,6 @@
 package plugin
 
-import "github.com/brandenwilliams/taskmanagementgo/libs/tasks"
+import "github.com/BrandenWilliams/dubyah/libs/tasks"
 
 type TasksEntry struct {
 	Title       string `json:"title" form:"title"`
