@@ -1,0 +1,25 @@
+[[group]]
+name="global"
+handlers = [
+]
+
+# Private API
+[[group]]
+name = "api"
+group = "global"
+httpPath = "/api"
+handlers = [ 
+   "jump.SetUserMW",
+]
+
+# Public API
+[[group]]
+name = "apiPublic"
+group = "global"
+httpPath = "/api"
+
+# Public Assets
+[[group]]
+name = "public"
+group = "global"
+httpPath = "/"

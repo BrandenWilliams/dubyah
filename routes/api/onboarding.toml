@@ -1,0 +1,40 @@
+[[group]]
+name = "onboarding"
+group = "apiPublic"
+httpPath = "/onboarding"
+handlers = []
+
+[[route]]
+method = "POST"
+group = "onboarding"
+httpPath = "/"
+handlers = [
+	"onboarding.New",
+]
+
+[[route]]
+method = "DELETE"
+group = "onboarding"
+httpPath = "/:userID"
+handlers = [
+    "onboarding.Delete",
+    "jump.CheckPermissionsMW(user,userID)",
+]
+
+# [[route]]
+# method = "GET"
+# group = "onboarding"
+# httpPath = "/confirm/:userID"
+# handlers = [
+# 	"onboarding.ConfirmUser",
+# 	"jump.CheckPermissionsMW(administration)",
+# ]
+
+# [[route]]
+# method = "POST"
+# group = "onboarding"
+# httpPath = "/disable/:userID"
+# handlers = [
+# 	"onboarding.DisableUser",
+# 	"jump.CheckPermissionsMW(administration)",
+# ]

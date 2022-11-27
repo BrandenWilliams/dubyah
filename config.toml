@@ -8,15 +8,16 @@ plugins = [
 	"github.com/vroomy-ext/jump-plugin@v0.19.0 as jump",
 
 	"github.com/BrandenWilliams/dubyah/plugins/auth",
+	"github.com/BrandenWilliams/dubyah/plugins/onboarding",
 	"github.com/BrandenWilliams/dubyah/plugins/templates",
 	"github.com/BrandenWilliams/dubyah/plugins/pages",
 
 ]
 
 include = [
+	"./routes/api",
 	"./routes/pages.toml",
 	"./routes/assets.toml",
-	"./routes/onboarding-pages.toml",
 	"./routes/404.toml",
 ]
 

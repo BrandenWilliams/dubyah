@@ -1,0 +1,71 @@
+[[group]]
+name = "authPublic"
+group = "apiPublic"
+
+# Public login
+#[[route]]
+#method = "GET"
+#httpPath = "/login"
+#target = "./public_html/web-app/login.html"
+
+[[route]]
+group = "authPublic"
+method = "POST"
+httpPath = "/login"
+handlers = [
+	"auth.Login",
+]
+
+[[group]]
+name = "auth"
+group = "api"
+
+# Private logout
+[[route]]
+group = "auth"
+method = "GET"
+httpPath = "/logout"
+handlers = [
+	"auth.Logout",
+]
+
+[[route]]
+group = "auth"
+method = "POST"
+httpPath = "/logout"
+handlers = [
+	"auth.Logout",
+]
+
+# [[route]]
+# group = "auth"
+# method = "post"
+# httpPath = "/groups/add"
+# handlers = [
+# 	"auth.AddToGroup",
+# ]
+
+# [[route]]
+# group = "auth"
+# method = "post"
+# httpPath = "/groups/remove"
+# handlers = [
+# 	"auth.RemoveFromGroup",
+# ]
+
+# # postman routes
+# [[route]]
+# group = "auth"
+# method = "PUT"
+# httpPath = "/groups"
+# handlers = [
+# 	"auth.AddToGroup",
+# ]
+
+# [[route]]
+# group = "auth"
+# method = "DELETE"
+# httpPath = "/groups"
+# handlers = [
+# 	"auth.RemoveFromGroup",
+# ]

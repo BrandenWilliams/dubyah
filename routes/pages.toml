@@ -1,5 +1,24 @@
+# Private Assets
+[[group]]
+name = "private"
+#group = "private"
+httpPath = "/"
+handlers = [ 
+   "jump.SetUserMW(true)",
+]
+
+# Private & Private Assets
+# Private Assets
+[[group]]
+name = "publicandprivate"
+httpPath = "/"
+handlers = [
+	"jump.SetUserMW(false,true)",
+]
+
 [[route]]
 method = "GET"
+group = "publicandprivate"
 httpPath = "/"
 handlers = [
 	"pages.Homepage",
@@ -7,6 +26,7 @@ handlers = [
 
 [[route]]
 method = "GET"
+group = "publicandprivate"
 httpPath = "/TechSupport"
 handlers = [
 	"pages.TechSupport",
@@ -14,6 +34,7 @@ handlers = [
 
 [[route]]
 method = "GET"
+group = "publicandprivate"
 httpPath = "/TaskManagement"
 handlers = [
 	"pages.TaskManagement",
@@ -21,6 +42,7 @@ handlers = [
 
 [[route]]
 method = "GET"
+group = "publicandprivate"
 httpPath = "/Websites"
 handlers = [
 	"pages.Websites",
@@ -28,7 +50,24 @@ handlers = [
 
 [[route]]
 method = "GET"
+group = "publicandprivate"
 httpPath = "/Resume"
 handlers = [
 	"pages.Resume",
+]
+
+[[route]]
+method = "GET"
+group = "public"
+httpPath = "/login"
+handlers = [
+	"pages.LoginPage",
+]
+
+[[route]]
+method = "GET"
+group = "public"
+httpPath = "/signup"
+handlers = [
+	"pages.SignUp",
 ]
