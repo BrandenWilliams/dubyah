@@ -77,58 +77,72 @@ func (p *Plugin) Load(env vroomy.Environment) (err error) {
 // Homepage is the handler for serving the homepage
 func (p *Plugin) Homepage(ctx common.Context) {
 	var d CoreData
-	d.PageTitle = "Homepage"
 	d.Meta = p.Meta.New(ctx)
+	d.PageTitle = "Homepage"
 
 	rendered := p.pages.Homepage.Render(d)
 	ctx.WriteString(200, "text/html", rendered)
 }
 
 func (p *Plugin) TechSupport(ctx common.Context) {
-	p.CoreData.PageTitle = "Technical Support"
+	var d CoreData
+	d.Meta = p.Meta.New(ctx)
+	d.PageTitle = "Technical Support"
 
-	rendered := p.pages.TechSupport.Render(p.CoreData)
+	rendered := p.pages.TechSupport.Render(d)
 	ctx.WriteString(200, "text/html", rendered)
 }
 
 func (p *Plugin) Websites(ctx common.Context) {
-	p.CoreData.PageTitle = "Websites"
+	var d CoreData
+	d.Meta = p.Meta.New(ctx)
+	d.PageTitle = "Websites"
 
-	rendered := p.pages.Websites.Render(p.CoreData)
+	rendered := p.pages.Websites.Render(d)
 	ctx.WriteString(200, "text/html", rendered)
 }
 
 func (p *Plugin) TaskManagement(ctx common.Context) {
-	p.CoreData.PageTitle = "Stack Show Case"
+	var d CoreData
+	d.Meta = p.Meta.New(ctx)
+	d.PageTitle = "Stack Show Case"
 
-	rendered := p.pages.TaskManagement.Render(p.CoreData)
+	rendered := p.pages.TaskManagement.Render(d)
 	ctx.WriteString(200, "text/html", rendered)
 }
 
 func (p *Plugin) Resume(ctx common.Context) {
-	p.CoreData.PageTitle = "Resume"
+	var d CoreData
+	d.Meta = p.Meta.New(ctx)
+	d.PageTitle = "Resume"
 
-	rendered := p.pages.Resume.Render(p.CoreData)
+	rendered := p.pages.Resume.Render(d)
 	ctx.WriteString(200, "text/html", rendered)
 }
 
 func (p *Plugin) NotFound(ctx common.Context) {
-	p.CoreData.PageTitle = "404 Not Found"
+	var d CoreData
+	d.Meta = p.Meta.New(ctx)
+	d.PageTitle = "404 Not Found"
 
-	rendered := p.pages.NotFound.Render(p.CoreData)
+	rendered := p.pages.NotFound.Render(d)
 	ctx.WriteString(200, "text/html", rendered)
 }
 
 func (p *Plugin) SignUp(ctx common.Context) {
-	p.CoreData.PageTitle = "Sign Up"
+	var d CoreData
+	d.Meta = p.Meta.New(ctx)
+	d.PageTitle = "Sign Up"
 
-	rendered := p.pages.SignUp.Render(p.CoreData)
+	rendered := p.pages.SignUp.Render(d)
 	ctx.WriteString(200, "text/html", rendered)
 }
 
 func (p *Plugin) LoginPage(ctx common.Context) {
-	p.CoreData.PageTitle = "Login Page"
+	var d CoreData
+	d.Meta = p.Meta.New(ctx)
+	d.PageTitle = "Login Up"
 
-	rendered := p.pages.Login.Render(p.CoreData)
+	rendered := p.pages.Login.Render(d)
 	ctx.WriteString(200, "text/html", rendered)
 }
