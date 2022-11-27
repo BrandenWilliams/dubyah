@@ -9,4 +9,8 @@ type Pages struct {
 	Websites       mustache.Template
 	Resume         mustache.Template
 	NotFound       mustache.Template
+
+	// Onboarding pages
+	SignUp mustache.Template
+	Login  mustache.Template
 }

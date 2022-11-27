@@ -3,7 +3,33 @@
 {{>header/header.html}}
 
 <body>
-    <h2>login</h2>
+    <sections>
+        <form-box>
+            <h2 class="bold marginSmall">Welcome</h2>
+            <form action="/api/login?redirect=/" method="POST" id="login">
+                <email-box>
+                    <label for="email">
+                        <p class="P12">Email</p>
+                    </label>
+                    <input type="text" name="email" id="email" placeholder="hello@email.com" class="marginXSmall"
+                        required>
+                </email-box>
+                <password-box>
+                    <label for="password">
+                        <p class="P12">Password</p>
+                    </label>
+                    <input type="password" name="password" id="password" placeholder="Password" required>
+                    {{#LoginErr}}<h4 class="center">{{LoginErr}}</h4>{{/LoginErr}}
+                    <a href="/passwordReset" class="marginXXSmall violet"><label class="L12">Forgot
+                            password?</label></a>
+                </password-box>
+                <login-button>
+                    <input type="submit" value="login" class="button">
+                </login-button>
+            </form>
+            <label class="L12">Not a member? <a href="/signup" class="violet">Join Now</a></label>
+        </form-box>
+    </sections>
 </body>
 
 {{>footer/footer.html}}

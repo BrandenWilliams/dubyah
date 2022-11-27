@@ -4,13 +4,13 @@
             <logo>LOGO HERE</logo>
         </logo-container>
         <login-container>
-            {{#IsLoggedIn}}
-            <a href="">logout</a>
-            {{/IsLoggedIn}}
-            {{^IsLoggedIn}}
-            <a href="">login</a>
-            <a href="">sign up</a>
-            {{/IsLoggedIn}}
+            {{#Meta.IsLoggedIn}}
+            <a href="/logout">logout</a>
+            {{/Meta.IsLoggedIn}}
+            {{^Meta.IsLoggedIn}}
+            <a href="/login">login</a>
+            <a href="/signup">sign up</a>
+            {{/Meta.IsLoggedIn}}
         </login-container>
     </header-container>
     {{>menu.html}}

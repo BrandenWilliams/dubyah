@@ -3,7 +3,38 @@
 {{>header/header.html}}
 
 <body>
-    <h2>signup</h2>
+    <form-wrap>
+        <form-box>
+            <h2 class="bold marginSmall">Sign Up</h2>
+            <form action="/api/onboarding?redirect={{RedirectURL}}" method="POST" id="signup">
+                <email-box>
+                    <label for="email">
+                        <p class="P12">Email</p>
+                    </label>
+                    <input type="text" name="email" id="email" placeholder="hello@email.com" class="marginXSmall"
+                        required>
+                </email-box>
+                <password-box>
+                    <label for="password">
+                        <p class="P12">Password</p>
+                    </label>
+                    <input type="password" name="password" id="password" placeholder="Password" class="marginXSmall"
+                        required>
+                </password-box>
+                <password-box>
+                    <label for="repeatpassword">
+                        <p class="P12">Repeat Password</p>
+                    </label>
+                    <input type="password" name="repeatpassword" id="repeatpassword" placeholder="Password"
+                        class="marginXSmall" required>
+                </password-box>
+                <signup-button class="marginXSmall">
+                    <input type="submit" value="signup" class="button">
+                </signup-button>
+            </form>
+            <label class="L12">Already a Member? <a href="/login" class="violet">Sign In</a></label>
+        </form-box>
+    </form-wrap>
 </body>
 
 {{>footer/footer.html}}

@@ -5,6 +5,7 @@ import (
 	"log"
 
 	"github.com/BrandenWilliams/dubyah/libs/templates"
+	"github.com/BrandenWilliams/dubyah/plugins/meta"
 	"github.com/gdbu/scribe"
 	"github.com/vroomy/common"
 	"github.com/vroomy/vroomy"
@@ -28,13 +29,14 @@ type Plugin struct {
 	CoreData CoreData
 
 	Templates *templates.Templates `vroomy:"templates"`
-
-	out *scribe.Scribe
+	Meta      *meta.Plugin         `vroomy:"meta"`
+	out       *scribe.Scribe
 }
 
 // Load will be called by vroomy on initialization
 func (p *Plugin) Load(env vroomy.Environment) (err error) {
 
+	// Common Pages
 	if err = p.Templates.ParseAndWatchTemplate("index", &p.pages.Homepage); err != nil {
 		return
 	}
@@ -47,10 +49,6 @@ func (p *Plugin) Load(env vroomy.Environment) (err error) {
 		return
 	}
 
-	if err = p.Templates.ParseAndWatchTemplate("taskManagement", &p.pages.TaskManagement); err != nil {
-		return
-	}
-
 	if err = p.Templates.ParseAndWatchTemplate("resume", &p.pages.Resume); err != nil {
 		return
 	}
@@ -59,18 +57,33 @@ func (p *Plugin) Load(env vroomy.Environment) (err error) {
 		return
 	}
 
+	// TaskManager pages
+	if err = p.Templates.ParseAndWatchTemplate("taskManagement", &p.pages.TaskManagement); err != nil {
+		return
+	}
+
+	// Onboarding pages
+	if err = p.Templates.ParseAndWatchTemplate("signUp", &p.pages.SignUp); err != nil {
+		return
+	}
+
+	if err = p.Templates.ParseAndWatchTemplate("login", &p.pages.Login); err != nil {
+		return
+	}
+
 	return
 }
 
 // Homepage is the handler for serving the homepage
 func (p *Plugin) Homepage(ctx common.Context) {
-	p.CoreData.PageTitle = "Homepage"
+	var d CoreData
+	d.PageTitle = "Homepage"
+	d.Meta = p.Meta.New(ctx)
 
-	rendered := p.pages.Homepage.Render(p.CoreData)
+	rendered := p.pages.Homepage.Render(d)
 	ctx.WriteString(200, "text/html", rendered)
 }
 
-// Homepage is the handler for serving the homepage
 func (p *Plugin) TechSupport(ctx common.Context) {
 	p.CoreData.PageTitle = "Technical Support"
 
@@ -78,7 +91,6 @@ func (p *Plugin) TechSupport(ctx common.Context) {
 	ctx.WriteString(200, "text/html", rendered)
 }
 
-// Homepage is the handler for serving the homepage
 func (p *Plugin) Websites(ctx common.Context) {
 	p.CoreData.PageTitle = "Websites"
 
@@ -86,7 +98,6 @@ func (p *Plugin) Websites(ctx common.Context) {
 	ctx.WriteString(200, "text/html", rendered)
 }
 
-// Homepage is the handler for serving the homepage
 func (p *Plugin) TaskManagement(ctx common.Context) {
 	p.CoreData.PageTitle = "Stack Show Case"
 
@@ -94,7 +105,6 @@ func (p *Plugin) TaskManagement(ctx common.Context) {
 	ctx.WriteString(200, "text/html", rendered)
 }
 
-// Homepage is the handler for serving the homepage
 func (p *Plugin) Resume(ctx common.Context) {
 	p.CoreData.PageTitle = "Resume"
 
@@ -102,10 +112,23 @@ func (p *Plugin) Resume(ctx common.Context) {
 	ctx.WriteString(200, "text/html", rendered)
 }
 
-// Homepage is the handler for serving the homepage
 func (p *Plugin) NotFound(ctx common.Context) {
-	p.CoreData.PageTitle = "Resume"
+	p.CoreData.PageTitle = "404 Not Found"
 
 	rendered := p.pages.NotFound.Render(p.CoreData)
+	ctx.WriteString(200, "text/html", rendered)
+}
+
+func (p *Plugin) SignUp(ctx common.Context) {
+	p.CoreData.PageTitle = "Sign Up"
+
+	rendered := p.pages.SignUp.Render(p.CoreData)
+	ctx.WriteString(200, "text/html", rendered)
+}
+
+func (p *Plugin) LoginPage(ctx common.Context) {
+	p.CoreData.PageTitle = "Login Page"
+
+	rendered := p.pages.Login.Render(p.CoreData)
 	ctx.WriteString(200, "text/html", rendered)
 }
