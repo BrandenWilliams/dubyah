@@ -6,31 +6,23 @@ import (
 
 	"github.com/BrandenWilliams/dubyah/libs/templates"
 	"github.com/BrandenWilliams/dubyah/plugins/errorpages"
-
 	"github.com/gdbu/jump"
 	"github.com/gdbu/jump/users"
-	"github.com/hatchify/errors"
 	"github.com/vroomy/common"
 	"github.com/vroomy/vroomy"
 )
 
 var p plugin
 
-const (
-	errCannotAddToGroup      = errors.Error("you do not have access to add users to groups")
-	errCannotRemoveFromGroup = errors.Error("you do not have access to remove users from groups")
-	errEmptyUserID           = errors.Error("userID is empty")
-)
-
 type plugin struct {
 	vroomy.BasePlugin
 
-	authPages AuthPages
+	pages pages
 
 	// Dependencies
 	Templates  *templates.Templates `vroomy:"templates"`
-	ErrorPages *errorpages.Plugin   `vroomy:"errorPages"`
 	Jump       *jump.Jump           `vroomy:"jump"`
+	ErrorPages *errorpages.Plugin   `vroomy:"errorPages"`
 }
 
 func init() {
@@ -41,12 +33,7 @@ func init() {
 
 // Load will be called by vroomy on initialization
 func (p *plugin) Load(env vroomy.Environment) (err error) {
-
-	if err = p.Templates.ParseAndWatchTemplate("login", &p.authPages.Login); err != nil {
-		return
-	}
-
-	if err = p.Templates.ParseAndWatchTemplate("signup", &p.authPages.SignUp); err != nil {
+	if err = p.Templates.ParseAndWatchTemplate("login", &p.pages.login); err != nil {
 		return
 	}
 
@@ -99,8 +86,9 @@ func (p *plugin) Login(ctx common.Context) {
 	if login.ID, err = p.Jump.Login(ctx, login.Email, login.Password); err != nil {
 		d.LoginErr = "Invalid Credentials"
 		// TODO: Respond differently based on content type
-		rendered := p.authPages.Login.Render(d)
+		rendered := p.pages.login.Render(d)
 		ctx.WriteString(400, "text/html", rendered)
+
 		return
 	}
 
@@ -114,13 +102,6 @@ func (p *plugin) Login(ctx common.Context) {
 
 	// TODO: Respond differently based on content type
 	ctx.WriteJSON(200, user)
-}
-
-// Logout is the logout handler
-func (p *plugin) SignUp(ctx common.Context) {
-
-	rendered := p.authPages.SignUp.Render()
-	ctx.WriteString(200, "text/html", rendered)
 }
 
 // Logout is the logout handler
@@ -144,10 +125,11 @@ func (p *plugin) LoginPage(ctx common.Context) {
 		d.RedirectURL = "/"
 	}
 
-	rendered := p.authPages.Login.Render(d)
+	rendered := p.pages.login.Render(d)
 	ctx.WriteString(200, "text/html", rendered)
 }
 
+/* TODO add group management
 // AddToGroup will add a user to a group. Currently the following groups are supported:
 //   - admins
 //   - inventory-managers
@@ -230,3 +212,4 @@ func (p *plugin) RemoveFromGroup(ctx common.Context) {
 
 	ctx.WriteJSON(200, "OK")
 }
+*/
