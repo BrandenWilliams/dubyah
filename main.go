@@ -19,6 +19,7 @@ import (
 	_ "github.com/BrandenWilliams/dubyah/plugins/onboarding"
 	_ "github.com/BrandenWilliams/dubyah/plugins/pages"
 	_ "github.com/BrandenWilliams/dubyah/plugins/s3source"
+	_ "github.com/BrandenWilliams/dubyah/plugins/tasklists"
 	_ "github.com/BrandenWilliams/dubyah/plugins/templates"
 )
 

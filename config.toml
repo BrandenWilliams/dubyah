@@ -11,6 +11,7 @@ plugins = [
 	"github.com/BrandenWilliams/dubyah/plugins/onboarding",
 	"github.com/BrandenWilliams/dubyah/plugins/templates",
 	"github.com/BrandenWilliams/dubyah/plugins/pages",
+	"github.com/BrandenWilliams/dubyah/plugins/tasklists",
 
 ]
 

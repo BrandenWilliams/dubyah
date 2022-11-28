@@ -1,8 +1,6 @@
-package tasks
+package tasklists
 
 import (
-	"strconv"
-
 	"github.com/hatchify/errors"
 	"github.com/mojura/mojura"
 )
@@ -22,18 +20,15 @@ type Entry struct {
 
 	// UserID which Entry is related to, used as a relational reference
 	UserID string `json:"userID"`
-	// Title of task
-	Title string `json:"title"`
-	// The text of the task itself
-	TaskText string `json:"taskText"`
-	// Bool representing if the task complete
-	IsCompleted bool `json:"isCompleted"`
+	// Task list title
+	ListTitle string `json:"listTitle"`
+
+	Tasks []Tasks `json:"tasks"`
 }
 
 // GetRelationships will return the relationship IDs associated with the Entry
 func (e *Entry) GetRelationships() (r mojura.Relationships) {
 	r.Append(e.UserID)
-	r.Append(strconv.FormatBool(e.IsCompleted))
 	return
 }
 
@@ -46,12 +41,8 @@ func (e *Entry) Validate() (err error) {
 		errs.Push(ErrEmptyUserID)
 	}
 
-	if len(e.Title) == 0 {
+	if len(e.Tasks) == 0 {
 		errs.Push(ErrEmptyTitle)
-	}
-
-	if len(e.TaskText) == 0 {
-		errs.Push(ErrEmptyTaskText)
 	}
 
 	// Note: If error list is empty, a nil value is returned
