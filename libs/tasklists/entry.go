@@ -29,6 +29,7 @@ type Entry struct {
 // GetRelationships will return the relationship IDs associated with the Entry
 func (e *Entry) GetRelationships() (r mojura.Relationships) {
 	r.Append(e.UserID)
+	r.Append(e.ID)
 	return
 }
 
