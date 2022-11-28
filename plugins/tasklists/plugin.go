@@ -14,7 +14,7 @@ import (
 var p Plugin
 
 func init() {
-	if err := vroomy.Register("tasks", &p); err != nil {
+	if err := vroomy.Register("tasklists", &p); err != nil {
 		log.Fatal(err)
 	}
 }
@@ -125,7 +125,7 @@ func (p *Plugin) AddNewTask(ctx common.Context) {
 	ctx.WriteJSON(200, updated)
 }
 
-func (p *Plugin) UpdateTaskPosition(ctx common.Context) {
+func (p *Plugin) UpdateTaskPositionUp(ctx common.Context) {
 	var (
 		e   TasksEntry
 		err error
@@ -138,6 +138,33 @@ func (p *Plugin) UpdateTaskPosition(ctx common.Context) {
 		return
 	}
 
-	p.tasklists.UpdateTaskPositionUp(ctx.Request().Context(), e.EntryID, e.TaskPosition)
+	var updated *tasklists.Entry
+	if updated, err = p.tasklists.UpdateTaskPositionUp(ctx.Request().Context(), e.EntryID, e.TaskPosition); err != nil {
+		err = fmt.Errorf("error updating task position up: %v", err)
+		return
+	}
 
+	ctx.WriteJSON(200, updated)
+}
+
+func (p *Plugin) UpdateTaskPositionDown(ctx common.Context) {
+	var (
+		e   TasksEntry
+		err error
+	)
+
+	// Parse request body as JSON
+	if err = ctx.Bind(&e); err != nil {
+		// Error parsing request body, return error
+		err = fmt.Errorf("error parsing request body: %v", err)
+		return
+	}
+
+	var updated *tasklists.Entry
+	if updated, err = p.tasklists.UpdateTaskPositionDown(ctx.Request().Context(), e.EntryID, e.TaskPosition); err != nil {
+		err = fmt.Errorf("error updating task position down: %v", err)
+		return
+	}
+
+	ctx.WriteJSON(200, updated)
 }
