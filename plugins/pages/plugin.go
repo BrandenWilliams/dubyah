@@ -58,7 +58,11 @@ func (p *Plugin) Load(env vroomy.Environment) (err error) {
 	}
 
 	// TaskManager pages
-	if err = p.Templates.ParseAndWatchTemplate("taskManagement", &p.pages.TaskManagement); err != nil {
+	if err = p.Templates.ParseAndWatchTemplate("taskManagement", &p.pages.TaskListsManagement); err != nil {
+		return
+	}
+
+	if err = p.Templates.ParseAndWatchTemplate("taskList", &p.pages.Tasklist); err != nil {
 		return
 	}
 
@@ -102,15 +106,6 @@ func (p *Plugin) Websites(ctx common.Context) {
 	ctx.WriteString(200, "text/html", rendered)
 }
 
-func (p *Plugin) TaskManagement(ctx common.Context) {
-	var d CoreData
-	d.Meta = p.Meta.New(ctx)
-	d.PageTitle = "Stack Show Case"
-
-	rendered := p.pages.TaskManagement.Render(d)
-	ctx.WriteString(200, "text/html", rendered)
-}
-
 func (p *Plugin) Resume(ctx common.Context) {
 	var d CoreData
 	d.Meta = p.Meta.New(ctx)
@@ -129,6 +124,7 @@ func (p *Plugin) NotFound(ctx common.Context) {
 	ctx.WriteString(200, "text/html", rendered)
 }
 
+// Auth pages
 func (p *Plugin) SignUp(ctx common.Context) {
 	var d CoreData
 	d.Meta = p.Meta.New(ctx)
@@ -144,5 +140,24 @@ func (p *Plugin) LoginPage(ctx common.Context) {
 	d.PageTitle = "Login Up"
 
 	rendered := p.pages.Login.Render(d)
+	ctx.WriteString(200, "text/html", rendered)
+}
+
+// Task Mangement pages
+func (p *Plugin) TaskListsManagement(ctx common.Context) {
+	var d CoreData
+	d.Meta = p.Meta.New(ctx)
+	d.PageTitle = "Task Mangement"
+
+	rendered := p.pages.TaskListsManagement.Render(d)
+	ctx.WriteString(200, "text/html", rendered)
+}
+
+func (p *Plugin) TaskList(ctx common.Context) {
+	var d CoreData
+	d.Meta = p.Meta.New(ctx)
+	d.PageTitle = "Task list"
+
+	rendered := p.pages.Tasklist.Render(d)
 	ctx.WriteString(200, "text/html", rendered)
 }

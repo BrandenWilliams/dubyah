@@ -35,14 +35,6 @@ handlers = [
 [[route]]
 method = "GET"
 group = "publicandprivate"
-httpPath = "/TaskManagement"
-handlers = [
-	"pages.TaskManagement",
-]
-
-[[route]]
-method = "GET"
-group = "publicandprivate"
 httpPath = "/Websites"
 handlers = [
 	"pages.Websites",
@@ -70,4 +62,21 @@ group = "public"
 httpPath = "/signup"
 handlers = [
 	"pages.SignUp",
+]
+
+# Task Management routes
+[[route]]
+method = "GET"
+group = "publicandprivate"
+httpPath = "/TaskManagement"
+handlers = [
+	"pages.TaskListsManagement",
+]
+
+[[route]]
+method = "GET"
+group = "publicandprivate"
+httpPath = "/TaskList"
+handlers = [
+	"pages.TaskList",
 ]
