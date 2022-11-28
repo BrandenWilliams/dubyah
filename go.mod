@@ -10,6 +10,7 @@ require (
 	github.com/hatchify/errors v0.4.82
 	github.com/hoisie/mustache v0.0.0-20160804235033-6375acf62c69
 	github.com/mojura/kiroku v0.9.8
+	github.com/mojura/mojura v0.15.0
 	github.com/vroomy-ext/fileserver-plugin v0.4.0
 	github.com/vroomy-ext/jump-plugin v0.19.0
 	github.com/vroomy-ext/mojura-opts-plugin v0.2.0
@@ -36,7 +37,6 @@ require (
 	github.com/mojura-backends/bolt v0.2.1 // indirect
 	github.com/mojura/backend v0.2.1 // indirect
 	github.com/mojura/enkodo v0.5.6 // indirect
-	github.com/mojura/mojura v0.15.0 // indirect
 	github.com/vroomy/config v0.4.1 // indirect
 	github.com/vroomy/httpserve v0.8.2 // indirect
 	golang.org/x/crypto v0.0.0-20201221181555-eec23a3978ad // indirect
