@@ -1,0 +1,60 @@
+[[group]]
+name = "tasklists"
+group = "api"
+httpPath = "/tasklists"
+handlers = []
+
+[[route]]
+method = "POST"
+group = "tasklists"
+httpPath = "/newList/:userID"
+handlers = [
+    "jump.CheckPermissionsMW(user,userID)",
+    "tasklists.NewTaskList",
+]
+
+[[route]]
+method = "POST"
+group = "tasklists"
+httpPath = "/newTask/:entryID"
+handlers = [
+    "jump.CheckPermissionsMW(user,userID)",
+    "tasklists.AddNewTask",
+]
+
+[[route]]
+method = "POST"
+group = "tasklists"
+httpPath = "/moveTaskUp/:entryID"
+handlers = [
+    "jump.CheckPermissionsMW(user,userID)",
+    "tasklists.UpdateTaskPositionUp",
+]
+
+[[route]]
+method = "POST"
+group = "tasklists"
+httpPath = "/moveTaskDown/:entryID"
+handlers = [
+    "jump.CheckPermissionsMW(user,userID)",
+    "tasklists.UpdateTaskPositionDown",
+]
+
+# [[route]]
+# method = "PUT"
+# group = "tasklists"
+# httpPath = "/updateText/:entryID"
+# handlers = [
+#     "jump.CheckPermissionsMW(tasks,entryID)",
+#     "tasklists.Update",
+# ]
+
+# [[route]]
+# method = "get"
+# group = "tasklists"
+# httpPath = "/:entryID"
+# handlers = [
+#     "jump.CheckPermissionsMW(user,userID)",
+#     "tasklists.New",
+# ]
+
