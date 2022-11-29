@@ -1,8 +1,8 @@
 dubyah
-DS_Store
+.DS_Store
 data
 public_html/css
-public_html/.DS_Stores
+public_html/.DS_Store
 *.bdb
 *.idb
 *.log
