@@ -82,7 +82,7 @@ func (p *Plugin) NewTaskList(ctx common.Context) {
 	}
 
 	// Create resource key
-	resourceKey := jump.NewResourceKey("tasks", created.ID)
+	resourceKey := jump.NewResourceKey("tasklists", created.ID)
 
 	// Set resource permissions for the current user ID
 	if err = p.Jump.Permissions().SetPermissions(resourceKey, userID, jump.PermRW); err != nil {
@@ -115,15 +115,6 @@ func (p *Plugin) AddNewTask(ctx common.Context) {
 		// Error inserting new Entry, return error
 		err = fmt.Errorf("error creating new entry: %v", err)
 		p.out.Notification(err.Error())
-		return
-	}
-
-	userID := ctx.Get("userID")
-	// Create resource key
-	resourceKey := jump.NewResourceKey("tasklists", updated.ID)
-
-	// Set resource permissions for the current user ID
-	if err = p.Jump.Permissions().SetPermissions(resourceKey, userID, jump.PermRW); err != nil {
 		return
 	}
 
