@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/BrandenWilliams/dubyah/libs/tasklists"
 	"github.com/BrandenWilliams/dubyah/libs/templates"
 	"github.com/BrandenWilliams/dubyah/plugins/meta"
 	"github.com/gdbu/scribe"
@@ -28,8 +29,9 @@ type Plugin struct {
 	pages    Pages
 	CoreData CoreData
 
-	Templates *templates.Templates `vroomy:"templates"`
-	Meta      *meta.Plugin         `vroomy:"meta"`
+	TaskLists *tasklists.Controller `vroomy:"tasklists"`
+	Templates *templates.Templates  `vroomy:"templates"`
+	Meta      *meta.Plugin          `vroomy:"meta"`
 	out       *scribe.Scribe
 }
 
@@ -145,18 +147,35 @@ func (p *Plugin) LoginPage(ctx common.Context) {
 
 // Task Mangement pages
 func (p *Plugin) TaskListsManagement(ctx common.Context) {
-	var d CoreData
+	var d TaskManagementData
 	d.Meta = p.Meta.New(ctx)
-	d.PageTitle = "Task Mangement"
+	d.PageTitle = "Tasks Mangement"
+
+	if d.Tles, d.err = p.TaskLists.GetByUserID(d.Meta.ViewingUserID); d.err != nil {
+		d.err = fmt.Errorf("error getting task lists: %v", d.err)
+		fmt.Printf("error: %v\n", d.err)
+		return
+	}
+
+	d.TaskListsEntry = makeTaskListsEntry(d.Tles)
 
 	rendered := p.pages.TaskListsManagement.Render(d)
 	ctx.WriteString(200, "text/html", rendered)
 }
 
 func (p *Plugin) TaskList(ctx common.Context) {
-	var d CoreData
+	var d TaskManagementData
 	d.Meta = p.Meta.New(ctx)
 	d.PageTitle = "Task list"
+	entryID := ctx.Param("entryID")
+
+	if d.Tle, d.err = p.TaskLists.Get(entryID); d.err != nil {
+		d.err = fmt.Errorf("error getting task: %v", d.err)
+		fmt.Printf("error: %v\n", d.err)
+		return
+	}
+
+	d.TasksEntry = makeTaskEntry(*d.Tle)
 
 	rendered := p.pages.Tasklist.Render(d)
 	ctx.WriteString(200, "text/html", rendered)
