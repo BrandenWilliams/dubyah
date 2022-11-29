@@ -41,6 +41,7 @@ func (c *Controller) New(ctx context.Context, userID string, e Entry) (created *
 	// Set entry's user ID
 	e.UserID = userID
 	// Validate entry
+
 	if err = e.Validate(); err != nil {
 		err = fmt.Errorf("error validating")
 		return
@@ -74,11 +75,35 @@ func (c *Controller) GetByUserID(userID string) (entries []*Entry, err error) {
 
 // Update will update the Entry for a given user ID
 func (c *Controller) AddTask(ctx context.Context, entryID string, t Tasks) (updated *Entry, err error) {
+	if t.TaskPosition, err = c.getNextPositionFromEntry(entryID); err != nil {
+		return
+	}
+
 	err = c.m.Transaction(ctx, func(txn *mojura.Transaction[Entry, *Entry]) (err error) {
 		updated, err = c.addTask(txn, entryID, t)
 		return
 	})
 
+	return
+}
+
+func (c *Controller) getNextPositionFromEntry(entryID string) (nextPosition int, err error) {
+	var (
+		e           *Entry
+		newPosition int
+	)
+
+	if e, err = c.Get(entryID); err != nil {
+		return
+	}
+
+	for _, e := range e.Tasks {
+		if e.TaskPosition > newPosition {
+			newPosition = e.TaskPosition
+		}
+	}
+
+	nextPosition = newPosition + 1
 	return
 }
 
