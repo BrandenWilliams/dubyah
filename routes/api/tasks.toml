@@ -18,7 +18,7 @@ method = "POST"
 group = "tasklists"
 httpPath = "/newTask/:entryID"
 handlers = [
-    "jump.CheckPermissionsMW(user,userID)",
+    "jump.CheckPermissionsMW(user,entryID)",
     "tasklists.AddNewTask",
 ]
 
