@@ -2,6 +2,7 @@ package tasklists
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/mojura/mojura"
 	"github.com/mojura/mojura/filters"
@@ -20,7 +21,7 @@ var relationships = []string{
 // New will return a new instance of the Controller
 func New(opts mojura.Opts) (cp *Controller, err error) {
 	var c Controller
-	opts.Name = "tasks"
+	opts.Name = "tasklists"
 	if c.m, err = mojura.New[Entry](opts, relationships...); err != nil {
 		return
 	}
@@ -41,6 +42,7 @@ func (c *Controller) New(ctx context.Context, userID string, e Entry) (created *
 	e.UserID = userID
 	// Validate entry
 	if err = e.Validate(); err != nil {
+		err = fmt.Errorf("error validating")
 		return
 	}
 
@@ -72,7 +74,6 @@ func (c *Controller) GetByUserID(userID string) (entries []*Entry, err error) {
 
 // Update will update the Entry for a given user ID
 func (c *Controller) AddTask(ctx context.Context, entryID string, t Tasks) (updated *Entry, err error) {
-
 	err = c.m.Transaction(ctx, func(txn *mojura.Transaction[Entry, *Entry]) (err error) {
 		updated, err = c.addTask(txn, entryID, t)
 		return
@@ -133,12 +134,6 @@ func (c *Controller) Close() (err error) {
 }
 
 func (c *Controller) new(txn *mojura.Transaction[Entry, *Entry], e Entry) (created *Entry, err error) {
-	// Attempt to validate Entry
-	if err = e.Validate(); err != nil {
-		// Entry is not valid, return validation error
-		return
-	}
-
 	// Insert Entry into mojura.Mojura and return the results
 	if created, err = txn.New(e); err != nil {
 		return

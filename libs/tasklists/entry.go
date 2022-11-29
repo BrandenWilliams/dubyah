@@ -10,8 +10,6 @@ const (
 	ErrEmptyUserID = errors.Error("invalid user ID, cannot be empty")
 	// ErrEmptyTitle is returned when the title for an Entry is empty
 	ErrEmptyTitle = errors.Error("invalid title, cannot be empty")
-	// ErrEmptyTaskText is returned when the task text for an Entry is empty
-	ErrEmptyTaskText = errors.Error("invalid task text, cannot be empty")
 )
 
 type Entry struct {
@@ -41,8 +39,8 @@ func (e *Entry) Validate() (err error) {
 	if len(e.UserID) == 0 {
 		errs.Push(ErrEmptyUserID)
 	}
-
-	if len(e.Tasks) == 0 {
+	// Check to see if User ID is set
+	if len(e.ListTitle) == 0 {
 		errs.Push(ErrEmptyTitle)
 	}
 
