@@ -42,10 +42,9 @@ type CreateRequest struct {
 
 // GetGroups will get the groups for a given CreateRequest
 func (c *CreateRequest) GetGroups() (groups []string) {
-	// All users are both shoppers and merchants
 	groups = []string{
 		"customer",
-		"tasker",
+		"tasklists",
 	}
 
 	return
