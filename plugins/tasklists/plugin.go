@@ -6,6 +6,7 @@ import (
 
 	"github.com/BrandenWilliams/dubyah/libs/tasklists"
 	"github.com/gdbu/jump"
+	"github.com/gdbu/scribe"
 	"github.com/mojura/mojura"
 	"github.com/vroomy/common"
 	"github.com/vroomy/vroomy"
@@ -23,7 +24,7 @@ type Plugin struct {
 	vroomy.BasePlugin
 
 	tasklists *tasklists.Controller
-
+	out       scribe.Scribe
 	// Dependencies
 	Jump *jump.Jump  `vroomy:"jump"`
 	Opts mojura.Opts `vroomy:"mojura-opts"`
@@ -65,16 +66,18 @@ func (p *Plugin) NewTaskList(ctx common.Context) {
 	if err = ctx.Bind(&e); err != nil {
 		// Error parsing request body, return error
 		err = fmt.Errorf("error parsing request body: %v", err)
+		p.out.Notification(err.Error())
 		return
 	}
 
-	userID := ctx.Get("userID")
+	userID := ctx.Param("userID")
 
 	var created *tasklists.Entry
 	// Attempt to insert parsed Entry into the tasks.Controller
 	if created, err = p.tasklists.New(ctx.Request().Context(), userID, e.makeTasklistsEntry()); err != nil {
 		// Error inserting new Entry, return error
 		err = fmt.Errorf("error creating new entry: %v", err)
+		p.out.Notification(err.Error())
 		return
 	}
 
@@ -96,25 +99,28 @@ func (p *Plugin) AddNewTask(ctx common.Context) {
 		err error
 	)
 
+	e.EntryID = ctx.Param("entryID")
+
 	// Parse request body as JSON
 	if err = ctx.Bind(&e); err != nil {
 		// Error parsing request body, return error
 		err = fmt.Errorf("error parsing request body: %v", err)
+		p.out.Notification(err.Error())
 		return
 	}
-
-	userID := ctx.Get("userID")
 
 	var updated *tasklists.Entry
 	// Attempt to insert parsed Entry into the tasks.Controller
 	if updated, err = p.tasklists.AddTask(ctx.Request().Context(), e.EntryID, e.makeTasksEntry()); err != nil {
 		// Error inserting new Entry, return error
 		err = fmt.Errorf("error creating new entry: %v", err)
+		p.out.Notification(err.Error())
 		return
 	}
 
+	userID := ctx.Get("userID")
 	// Create resource key
-	resourceKey := jump.NewResourceKey("tasks", updated.ID)
+	resourceKey := jump.NewResourceKey("tasklists", updated.ID)
 
 	// Set resource permissions for the current user ID
 	if err = p.Jump.Permissions().SetPermissions(resourceKey, userID, jump.PermRW); err != nil {
@@ -135,12 +141,14 @@ func (p *Plugin) UpdateTaskPositionUp(ctx common.Context) {
 	if err = ctx.Bind(&e); err != nil {
 		// Error parsing request body, return error
 		err = fmt.Errorf("error parsing request body: %v", err)
+		p.out.Notification(err.Error())
 		return
 	}
 
 	var updated *tasklists.Entry
 	if updated, err = p.tasklists.UpdateTaskPositionUp(ctx.Request().Context(), e.EntryID, e.TaskPosition); err != nil {
 		err = fmt.Errorf("error updating task position up: %v", err)
+		p.out.Notification(err.Error())
 		return
 	}
 
@@ -157,12 +165,14 @@ func (p *Plugin) UpdateTaskPositionDown(ctx common.Context) {
 	if err = ctx.Bind(&e); err != nil {
 		// Error parsing request body, return error
 		err = fmt.Errorf("error parsing request body: %v", err)
+		p.out.Notification(err.Error())
 		return
 	}
 
 	var updated *tasklists.Entry
 	if updated, err = p.tasklists.UpdateTaskPositionDown(ctx.Request().Context(), e.EntryID, e.TaskPosition); err != nil {
 		err = fmt.Errorf("error updating task position down: %v", err)
+		p.out.Notification(err.Error())
 		return
 	}
 
