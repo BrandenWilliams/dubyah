@@ -45,7 +45,7 @@ method = "Post"
 group = "tasklists"
 httpPath = "/deleteTask/:entryID"
 handlers = [
-    "jump.CheckPermissionsMW(user,userID)",
+    "jump.CheckPermissionsMW(tasklists,entryID)",
     "tasklists.DeleteTask",
 ]
 
@@ -54,25 +54,6 @@ method = "Post"
 group = "tasklists"
 httpPath = "/deleteTaskList/:entryID"
 handlers = [
-    "jump.CheckPermissionsMW(tasklists,userID)",
+    "jump.CheckPermissionsMW(tasklists,entryID)",
     "tasklists.DeleteTaskList",
 ]
-
-# [[route]]
-# method = "PUT"
-# group = "tasklists"
-# httpPath = "/updateText/:entryID"
-# handlers = [
-#     "jump.CheckPermissionsMW(tasks,entryID)",
-#     "tasklists.Update",
-# ]
-
-# [[route]]
-# method = "get"
-# group = "tasklists"
-# httpPath = "/:entryID"
-# handlers = [
-#     "jump.CheckPermissionsMW(user,userID)",
-#     "tasklists.New",
-# ]
-
