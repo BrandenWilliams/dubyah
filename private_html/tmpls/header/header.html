@@ -5,7 +5,7 @@
         </logo-container>
         <login-container>
             {{#Meta.IsLoggedIn}}
-            <a href="/logout">logout</a>
+            <a href="/api/logout?redirect=/">logout</a>
             {{/Meta.IsLoggedIn}}
             {{^Meta.IsLoggedIn}}
             <a href="/login">login</a>
