@@ -40,6 +40,25 @@ handlers = [
     "tasklists.UpdateTaskPositionDown",
 ]
 
+[[route]]
+method = "Post"
+group = "tasklists"
+httpPath = "/deleteTask/:entryID"
+handlers = [
+    "jump.CheckPermissionsMW(user,entryID)",
+    "tasklists.DeleteTask",
+]
+
+[[route]]
+method = "Post"
+group = "tasklists"
+httpPath = "/deleteTaskList/:entryID"
+handlers = [
+    "jump.CheckPermissionsMW(user,entryID)",
+    "tasklists.DeleteTaskList",
+]
+
+
 # [[route]]
 # method = "PUT"
 # group = "tasklists"

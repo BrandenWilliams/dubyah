@@ -178,3 +178,46 @@ func (p *Plugin) UpdateTaskPositionDown(ctx common.Context) {
 
 	ctx.WriteJSON(200, updated)
 }
+
+func (p *Plugin) DeleteTask(ctx common.Context) {
+	var (
+		te      TasksEntry
+		deleted *tasklists.Entry
+		err     error
+	)
+
+	entryID := ctx.Param("entryID")
+
+	// Parse request body as JSON
+	if err = ctx.Bind(&te); err != nil {
+		// Error parsing request body, return error
+		err = fmt.Errorf("error parsing request body: %v", err)
+		p.out.Notification(err.Error())
+		return
+	}
+
+	if deleted, err = p.tasklists.DeleteTask(ctx.Request().Context(), entryID, te.makeTasksEntry()); err != nil {
+		err = fmt.Errorf("error deleting task: %v", err)
+		p.out.Notification(err.Error())
+		return
+	}
+
+	ctx.WriteJSON(200, deleted)
+}
+
+func (p *Plugin) DeleteTaskList(ctx common.Context) {
+	var (
+		deleted *tasklists.Entry
+		err     error
+	)
+
+	entryID := ctx.Param("entryID")
+
+	if deleted, err = p.tasklists.DeleteTaskList(ctx.Request().Context(), entryID); err != nil {
+		err = fmt.Errorf("error deleting task list: %v", err)
+		p.out.Notification(err.Error())
+		return
+	}
+
+	ctx.WriteJSON(200, deleted)
+}

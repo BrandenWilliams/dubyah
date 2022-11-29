@@ -116,6 +116,15 @@ func (c *Controller) DeleteTask(ctx context.Context, entryID string, t Tasks) (d
 	return
 }
 
+func (c *Controller) DeleteTaskList(ctx context.Context, entryID string) (removed *Entry, err error) {
+	err = c.m.Transaction(ctx, func(txn *mojura.Transaction[Entry, *Entry]) (err error) {
+		removed, err = c.delete(txn, entryID)
+		return
+	})
+
+	return
+}
+
 func (c *Controller) UpdateTaskText(ctx context.Context, entryID string, taskPosition int, e Entry) (updated *Entry, err error) {
 	err = c.m.Transaction(ctx, func(txn *mojura.Transaction[Entry, *Entry]) (err error) {
 		updated, err = c.updateTaskText(txn, entryID, taskPosition, &e)
@@ -137,15 +146,6 @@ func (c *Controller) UpdateTaskPositionUp(ctx context.Context, entryID string, c
 func (c *Controller) UpdateTaskPositionDown(ctx context.Context, entryID string, currentPosition int) (updated *Entry, err error) {
 	err = c.m.Transaction(ctx, func(txn *mojura.Transaction[Entry, *Entry]) (err error) {
 		updated, err = c.moveTaskPositionDown(txn, entryID, currentPosition)
-		return
-	})
-
-	return
-}
-
-func (c *Controller) DeleteTaskList(ctx context.Context, userID string) (removed *Entry, err error) {
-	err = c.m.Transaction(ctx, func(txn *mojura.Transaction[Entry, *Entry]) (err error) {
-		removed, err = c.delete(txn, userID)
 		return
 	})
 
