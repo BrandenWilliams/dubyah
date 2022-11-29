@@ -1,8 +1,13 @@
 <task-lists>
     {{#TaskListsEntry}}
     {{#TaskLists}}
-    <p>Title: {{ListTitle}}</p>
+    <p>
+    <h3>Title: {{ListTitle}}</h3>
     <a href="/taskList/{{EntryID}}" class="button">View Task</a>
+    <form method="post" action="/api/tasklists/deleteTaskList/{{EntryID}}">
+        <button>Delete</button>
+    </form>
+    </p>
     {{/TaskLists}}
     {{/TaskListsEntry}}
     {{^TaskListsEntry}}
