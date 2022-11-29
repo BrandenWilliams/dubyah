@@ -27,7 +27,7 @@ handlers = [
 [[route]]
 method = "GET"
 group = "publicandprivate"
-httpPath = "/TechSupport"
+httpPath = "/techSupport"
 handlers = [
 	"pages.TechSupport",
 ]
@@ -35,7 +35,7 @@ handlers = [
 [[route]]
 method = "GET"
 group = "publicandprivate"
-httpPath = "/Websites"
+httpPath = "/websites"
 handlers = [
 	"pages.Websites",
 ]
@@ -43,7 +43,7 @@ handlers = [
 [[route]]
 method = "GET"
 group = "publicandprivate"
-httpPath = "/Resume"
+httpPath = "/resume"
 handlers = [
 	"pages.Resume",
 ]
@@ -68,15 +68,16 @@ handlers = [
 [[route]]
 method = "GET"
 group = "publicandprivate"
-httpPath = "/TaskManagement"
+httpPath = "/taskManagement"
 handlers = [
 	"pages.TaskListsManagement",
 ]
 
 [[route]]
 method = "GET"
-group = "publicandprivate"
-httpPath = "/TaskList"
+group = "private"
+httpPath = "/taskList/:entryID"
 handlers = [
 	"pages.TaskList",
+	"jump.CheckPermissionsMW(tasklists,entryID)",
 ]
