@@ -1,0 +1,12 @@
+<task-entry>
+    {{#TasksEntry}}
+
+    <p>Task:{{ListTitle}} </p>
+    {{#Tasks}}
+    <p>{{TaskPosition}}.{{TaskText}}</p>
+    {{/Tasks}}
+    {{/TasksEntry}}
+    {{^TasksEntry}}
+    <p>no tasks - enter below</p>
+    {{/TasksEntry}}
+</task-entry>
