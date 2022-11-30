@@ -1,16 +1,20 @@
 <task-lists>
     {{#TaskListsEntry}}
     {{#TaskLists}}
-    <p>
-    <h3>Title: {{ListTitle}}</h3>
-    <a href="/taskList/{{EntryID}}" class="button">View Task</a>
-    <form method="post" action="/api/tasklists/deleteTaskList/{{EntryID}}">
-        <button>Delete</button>
-    </form>
-    </p>
+    <task-list>
+        <p>
+        <h3>Title: {{ListTitle}}</h3>
+        <a href="/taskList/{{EntryID}}" class="button">View Task</a>
+        <form method="post" action="/api/tasklists/deleteTaskList/{{EntryID}}?redirect=/taskManagement">
+            <button>Delete</button>
+        </form>
+        </p>
+    </task-list>
     {{/TaskLists}}
-    {{/TaskListsEntry}}
-    {{^TaskListsEntry}}
-    <p>no tasks - create below</p>
+    {{^TaskLists}}
+    <task-list>
+        <p>no task list - create below</p>
+    </task-list>
+    {{/TaskLists}}
     {{/TaskListsEntry}}
 </task-lists>

@@ -1,12 +1,19 @@
 <task-entry>
     {{#TasksEntry}}
-
     <p>Task:{{ListTitle}} </p>
+
     {{#Tasks}}
+    <p>test</p>
     <p>{{TaskPosition}}.{{TaskText}}</p>
     {{/Tasks}}
-    {{/TasksEntry}}
-    {{^TasksEntry}}
+    {{^Tasks}}
     <p>no tasks - enter below</p>
+    {{/Tasks}}
+
     {{/TasksEntry}}
+
+    {{^TasksEntry}}
+    <p>test 2</p>
+    {{/TasksEntry}}
+
 </task-entry>

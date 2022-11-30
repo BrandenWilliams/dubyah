@@ -1,5 +1,6 @@
 <new-task-form>
-    <form method="post" action="/api/tasklists/newTask/{{TasksEntry.EntryID}}">
+    <form method="post"
+        action="/api/tasklists/newTask/{{TasksEntry.EntryID}}?redirect=/taskList/{{TasksEntry.EntryID}}">
         <task-title>
             <label class="LT14 bold" for="taskText">Task Text</label>
             <input id="firstNameInput" type="text" name="taskText" value="Task Title" />
