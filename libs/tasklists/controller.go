@@ -221,35 +221,12 @@ func (c *Controller) moveTaskPositionUp(txn *mojura.Transaction[Entry, *Entry], 
 	updated, err = c.update(txn, entryID, func(orig *Entry) (err error) {
 		var newTasks []Tasks
 		for _, te := range orig.Tasks {
-
-			switch position := te.TaskPosition; {
-
-			case position == currentPosition:
-				te.TaskPosition = te.TaskPosition + 1
-				newTasks = append(newTasks, te)
-			case position == (currentPosition + 1):
-				te.TaskPosition = te.TaskPosition - 1
-				newTasks = append(newTasks, te)
-			default:
-				newTasks = append(newTasks, te)
-			}
-		}
-
-		orig.Tasks = newTasks
-
-		return
-	})
-
-	return
-}
-
-func (c *Controller) moveTaskPositionDown(txn *mojura.Transaction[Entry, *Entry], entryID string, currentPosition int) (updated *Entry, err error) {
-	updated, err = c.update(txn, entryID, func(orig *Entry) (err error) {
-		var newTasks []Tasks
-		for _, te := range orig.Tasks {
 			switch position := te.TaskPosition; {
 			case position == currentPosition:
 				te.TaskPosition = te.TaskPosition - 1
+				if te.TaskPosition == 0 {
+					te.TaskPosition = 1
+				}
 				newTasks = append(newTasks, te)
 			case position == (currentPosition - 1):
 				te.TaskPosition = te.TaskPosition + 1
@@ -259,12 +236,48 @@ func (c *Controller) moveTaskPositionDown(txn *mojura.Transaction[Entry, *Entry]
 			}
 		}
 
-		orig.Tasks = newTasks
+		orig.Tasks = ReorderTasks(newTasks)
 
 		return
 	})
 
 	return
+}
+
+func (c *Controller) moveTaskPositionDown(txn *mojura.Transaction[Entry, *Entry], entryID string, currentPosition int) (updated *Entry, err error) {
+	updated, err = c.update(txn, entryID, func(orig *Entry) (err error) {
+		var (
+			newTasks []Tasks
+			maxCount int
+		)
+
+		maxCount = len(orig.Tasks)
+
+		for _, te := range orig.Tasks {
+
+			switch position := te.TaskPosition; {
+			case position == currentPosition:
+				te.TaskPosition = te.TaskPosition + 1
+				if te.TaskPosition > maxCount {
+					te.TaskPosition = maxCount
+				}
+
+				newTasks = append(newTasks, te)
+			case position == (currentPosition + 1):
+				te.TaskPosition = te.TaskPosition - 1
+				newTasks = append(newTasks, te)
+			default:
+				newTasks = append(newTasks, te)
+			}
+		}
+
+		orig.Tasks = ReorderTasks(newTasks)
+
+		return
+	})
+
+	return
+
 }
 
 func (c *Controller) addTask(txn *mojura.Transaction[Entry, *Entry], entryID string, t Tasks) (updated *Entry, err error) {
@@ -297,10 +310,79 @@ func (c *Controller) deleteTask(txn *mojura.Transaction[Entry, *Entry], entryID 
 			}
 		}
 
-		orig.Tasks = newTasks
+		orig.Tasks = ReorderTasks(newTasks)
 
 		return
 	})
+
+	return
+}
+
+func ReorderTasks(unorderedTasks []Tasks) (orderedTasks []Tasks) {
+	var (
+		HasGap bool
+	)
+
+	loopCount := len(unorderedTasks) + 1
+	for i := 1; i < loopCount; i++ {
+		var hasAppended bool
+		for _, e := range unorderedTasks {
+			if e.TaskPosition == i {
+				orderedTasks = append(orderedTasks, e)
+				hasAppended = true
+				break
+			}
+		}
+
+		if !hasAppended {
+			HasGap = true
+		}
+	}
+
+	if HasGap {
+		orderedTasks = TaskHasPositionGap(orderedTasks)
+	}
+
+	return
+}
+
+func TaskHasPositionGap(ot []Tasks) (nt []Tasks) {
+	currentTasks := ot
+	loopCount := len(ot) + 1
+
+	for i := 1; i < loopCount; i++ {
+		var (
+			matched bool
+			newSet  []Tasks
+		)
+
+		for _, e := range currentTasks {
+			if e.TaskPosition == i {
+				nt = append(nt, e)
+				matched = true
+			} else {
+				newSet = append(newSet, e)
+			}
+		}
+
+		var unmatchedNewSet []Tasks
+
+		if !matched {
+			for _, e := range newSet {
+				if e.TaskPosition == i+1 {
+					e.TaskPosition = i
+					nt = append(nt, e)
+					break
+				} else {
+					unmatchedNewSet = append(unmatchedNewSet, e)
+				}
+			}
+			currentTasks = unmatchedNewSet
+		} else {
+			currentTasks = newSet
+		}
+
+	}
 
 	return
 }
