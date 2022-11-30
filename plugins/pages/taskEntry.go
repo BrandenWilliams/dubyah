@@ -30,7 +30,7 @@ func makeTaskEntry(e tasklists.Entry) (tle tasksEntry) {
 
 func makeTask(tl tasklists.Tasks) (ntl task) {
 	ntl.TaskText = tl.TaskText
-	ntl.TaskPosition = tl.TaskPosition + 1
+	ntl.TaskPosition = tl.TaskPosition
 	ntl.IsCompleted = tl.IsCompleted
 	return
 }
