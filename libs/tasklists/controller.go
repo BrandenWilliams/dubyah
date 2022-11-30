@@ -290,30 +290,31 @@ func (c *Controller) addTask(txn *mojura.Transaction[Entry, *Entry], entryID str
 	return
 }
 
-func (c *Controller) deleteTask(txn *mojura.Transaction[Entry, *Entry], entryID string, taskPosition int) (updated *Entry, err error) {
+func (c *Controller) deleteTask(txn *mojura.Transaction[Entry, *Entry], entryID string, tp int) (updated *Entry, err error) {
 	updated, err = c.update(txn, entryID, func(orig *Entry) (err error) {
 		var newTasks []Tasks
 		for _, e := range orig.Tasks {
-			switch pos := e.TaskPosition; {
-			case pos > taskPosition:
-				newTasks = append(newTasks, e)
-			case pos == taskPosition:
+			if e.TaskPosition == tp {
 				continue
-			case pos < taskPosition:
-				e.TaskPosition = e.TaskPosition - 1
-				newTasks = append(newTasks, e)
+			}
 
-			}
-			if e.TaskPosition != taskPosition {
-				e.TaskPosition = e.TaskPosition - 1
-				newTasks = append(newTasks, e)
-			}
+			newTasks = append(newTasks, e)
+
 		}
 
-		orig.Tasks = ReorderTasks(newTasks)
+		orig.Tasks = DeleteTaskReorder(newTasks)
 
 		return
 	})
+
+	return
+}
+
+func DeleteTaskReorder(ut []Tasks) (ot []Tasks) {
+	for n, e := range ut {
+		e.TaskPosition = n + 1
+		ot = append(ot, e)
+	}
 
 	return
 }
