@@ -13,6 +13,10 @@
             <input type="hidden" name="taskPosition" value="{{TaskPosition}}">
             <button>move down</button>
         </form>
+        <form method="post" action="/api/tasklists/deleteTask/{{TasksEntry.EntryID}}">
+            <input type="hidden" name="taskPosition" value="{{TaskPosition}}">
+            <button>delete</button>
+        </form>
         </p>
     </tasks>
     {{/Tasks}}
