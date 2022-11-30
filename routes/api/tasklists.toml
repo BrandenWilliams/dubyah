@@ -27,7 +27,7 @@ method = "POST"
 group = "tasklists"
 httpPath = "/moveTaskUp/:entryID"
 handlers = [
-    "jump.CheckPermissionsMW(user,userID)",
+    "jump.CheckPermissionsMW(tasklists,entryID)",
     "tasklists.UpdateTaskPositionUp",
 ]
 
@@ -36,7 +36,7 @@ method = "POST"
 group = "tasklists"
 httpPath = "/moveTaskDown/:entryID"
 handlers = [
-    "jump.CheckPermissionsMW(user,userID)",
+    "jump.CheckPermissionsMW(tasklists,entryID)",
     "tasklists.UpdateTaskPositionDown",
 ]
 
