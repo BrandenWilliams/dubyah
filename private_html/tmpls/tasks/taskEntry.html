@@ -6,9 +6,11 @@
         <p>{{TaskPosition}}.{{TaskText}}</p>
         <p>
         <form method="post" action="/api/tasklists/moveTaskUp/{{TasksEntry.EntryID}}">
+            <input type="hidden" name="taskPosition" value="{{TaskPosition}}">
             <button>move up</button>
         </form>
         <form method="post" action="/api/tasklists/moveTaskDown/{{TasksEntry.EntryID}}">
+            <input type="hidden" name="taskPosition" value="{{TaskPosition}}">
             <button>move down</button>
         </form>
         </p>
