@@ -1,19 +1,23 @@
 <task-entry>
     {{#TasksEntry}}
-    <p>Task:{{ListTitle}} </p>
-
+    <h3>Task:{{ListTitle}}</h3>
     {{#Tasks}}
-    <p>test</p>
-    <p>{{TaskPosition}}.{{TaskText}}</p>
+    <tasks>
+        <p>{{TaskPosition}}.{{TaskText}}</p>
+        <p>
+        <form method="post" action="/api/tasklists/moveTaskUp/{{TasksEntry.EntryID}}">
+            <button>move up</button>
+        </form>
+        <form method="post" action="/api/tasklists/moveTaskDown/{{TasksEntry.EntryID}}">
+            <button>move down</button>
+        </form>
+        </p>
+    </tasks>
     {{/Tasks}}
     {{^Tasks}}
-    <p>no tasks - enter below</p>
+    <tasks>
+        <p>no tasks - enter below</p>
+    </tasks>
     {{/Tasks}}
-
     {{/TasksEntry}}
-
-    {{^TasksEntry}}
-    <p>test 2</p>
-    {{/TasksEntry}}
-
 </task-entry>
