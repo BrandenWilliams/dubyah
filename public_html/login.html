@@ -1,0 +1,46 @@
+<html>
+
+<head>
+    <title>Login</title>
+    <link href="/static/css/style.css" rel="stylesheet" />
+    <script src="/static/js/auth.js"></script>
+    <script src="/static/js/httpRequest.js"></script>
+
+</head>
+
+<header>
+    <header-container>
+        <logo-container>
+            <logo>LOGO HERE</logo>
+        </logo-container>
+        <login-container>
+            <a href="/api/logout?redirect=/">logout</a>
+            <a href="/login">login</a>
+            <a href="/signup">sign up</a>
+        </login-container>
+    </header-container>
+    <nav>
+        <a href="/">Homepage</a>
+        <a href="/taskManagement">Task Management</a>
+        <a href="/websites">Websites</a>
+        <a href="/techSupport">Tech Support</a>
+        <a href="/resume">Resume</a>
+    </nav>
+</header>
+
+<body>
+    <h3>Login</h3>
+    <!-- TODO convert to vue -->
+    <form id="loginForm">
+        <input type="text" id="emailSubmit" placeholder="email" autocomplete="current-email" required />
+        <input type="password" id="passwordSubmit" placeholder="password" autocomplete="current-password" required />
+        <button type="submit" onclick="loginSubmit()">Login
+        </button>
+    </form>
+    <!-- TODO convert to vue -->
+</body>
+<footer>
+    <p>Created by Branden Williams contact: BrandenWilliams07@gmail.com</p>
+</footer>
+
+</html>

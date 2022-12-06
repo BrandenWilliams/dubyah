@@ -18,6 +18,7 @@ plugins = [
 include = [
 	"./routes/api",
 	"./routes/pages.toml",
+	"./routes/jspages.toml",
 	"./routes/assets.toml",
 	"./routes/404.toml",
 ]

@@ -1,0 +1,27 @@
+[[group]]
+name = "javaScriptPages"
+httpPath = "/js"
+handlers = [
+	"jump.SetUserMW(false,true)",
+]
+
+[[route]]
+group = "javaScriptPages"
+httpPath = "/homepage"
+handlers = [
+   "fileserver.ServeFile(./public_html/index.html)"
+]
+
+[[route]]
+group = "javaScriptPages"
+httpPath = "/login"
+handlers = [
+   "fileserver.ServeFile(./public_html/login.html)"
+]
+
+[[route]]
+group = "javaScriptPages"
+httpPath = "/signup"
+handlers = [
+   "fileserver.ServeFile(./public_html/signup.html)"
+]

@@ -64,9 +64,11 @@ func (p *plugin) Login(ctx common.Context) {
 		d.RedirectURL = "/"
 	}
 
+	// TODO: Respond differently based on content type
 	contentType := ctx.Request().Header.Get("Content-Type")
 	switch contentType {
 	case "application/x-www-form-urlencoded":
+		fmt.Printf("testing www.form\n")
 		if err := ctx.Request().ParseForm(); err != nil {
 			err = fmt.Errorf("error parsing form: %v", err)
 			p.ErrorPages.RenderError(ctx, err)
@@ -78,6 +80,7 @@ func (p *plugin) Login(ctx common.Context) {
 
 	default:
 		if err = ctx.Bind(&login); err != nil {
+			fmt.Printf("error binding: %v\n", err)
 			p.ErrorPages.RenderError(ctx, err)
 			return
 		}
@@ -85,7 +88,6 @@ func (p *plugin) Login(ctx common.Context) {
 
 	if login.ID, err = p.Jump.Login(ctx, login.Email, login.Password); err != nil {
 		d.LoginErr = "Invalid Credentials"
-		// TODO: Respond differently based on content type
 		rendered := p.pages.login.Render(d)
 		ctx.WriteString(400, "text/html", rendered)
 
@@ -95,12 +97,10 @@ func (p *plugin) Login(ctx common.Context) {
 	var user *users.User
 	if user, err = p.Jump.GetUser(login.ID); err != nil {
 		err = fmt.Errorf("error getting user %s: %v", login.ID, err)
-		// TODO: Respond differently based on content type
 		p.ErrorPages.RenderError(ctx, err)
 		return
 	}
-
-	// TODO: Respond differently based on content type
+	fmt.Printf("success! userid: %v\n", user.ID)
 	ctx.WriteJSON(200, user)
 }
 
