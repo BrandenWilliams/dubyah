@@ -1,17 +1,5 @@
-function loginSubmit() {
-    const url = "/api/login"
-    data = JSON.stringify({
-        email: document.getElementById("emailSubmit").value,
-        password: document.getElementById("passwordSubmit").value
-    })
-
-    resp = httpRequest("POST", url, data)
-
-}
-
-/*
-
-function loginSubmit() {
+function loginSubmit(evt) {
+    evt.preventDefault()
     var email = document.getElementById("emailSubmit")
     var password = document.getElementById("passwordSubmit")
     const url = "/api/login"
@@ -30,6 +18,21 @@ function loginSubmit() {
         .then(json => console.log("response: " + json));
 }
 
+/*
+function loginSubmit(evt) {
+    evt.preventDefault()
+    const url = "/api/login"
+    data = JSON.stringify({
+        email: document.getElementById("emailSubmit").value,
+        password: document.getElementById("passwordSubmit").value
+    })
+
+    resp = httpRequest("POST", url, data)
+
+}
+*/
+
+/*
 function signUp(email, password, repeatPassword) {
     if (password != repeatPassword) {
         return
