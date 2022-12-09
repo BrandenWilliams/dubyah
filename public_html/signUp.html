@@ -11,10 +11,14 @@
         <logo-container>
             <logo>LOGO HERE</logo>
         </logo-container>
-        <login-container>
-            <a href="/api/logout?redirect=/">logout</a>
-            <a href="/login">login</a>
-            <a href="/signup">sign up</a>
+        <login-container id="loginCheck">
+            <span v-if="isLoggedIn">
+                <a :href="logout">Logout</a>
+            </span>
+            <span v-else>
+                <a href="/register">Register</a> |
+                <a href="/login">Login</a>
+            </span>
         </login-container>
     </header-container>
     <nav>

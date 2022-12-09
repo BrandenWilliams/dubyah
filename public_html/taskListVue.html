@@ -3,8 +3,7 @@
 <head>
     <title>Task List Management with Vue</title>
     <link href="/static/css/style.css" rel="stylesheet" />
-    <script src="/js/auth.js"></script>
-
+    <script src="/js/tasks.js"></script>
 </head>
 
 <header>
@@ -12,10 +11,14 @@
         <logo-container>
             <logo>LOGO HERE</logo>
         </logo-container>
-        <login-container>
-            <a href="/api/logout?redirect=/">logout</a>
-            <a href="/login">login</a>
-            <a href="/signup">sign up</a>
+        <login-container id="loginCheck">
+            <span v-if="isLoggedIn">
+                <a :href="logout">Logout</a>
+            </span>
+            <span v-else>
+                <a href="/register">Register</a> |
+                <a href="/login">Login</a>
+            </span>
         </login-container>
     </header-container>
     <nav>
@@ -30,13 +33,7 @@
 <body>
     <h3>Manage your Task</h3>
     <!-- TODO convert to vue -->
-    <form>
-        <input type="text" id="email" placeholder="email" onChange={this.handleIdInput} />
-        <input type="password" placeholder="password" id="password" onChange={this.handleIdInput} />
-        <button type="submit" disabled={this.EnableLoginButton()} id={This.ChangeLoginButtonStyle()}
-            onCick={this.login}>Login
-        </button>
-    </form>
+    <p>task data</p>
     <!-- TODO convert to vue -->
 </body>
 <footer>

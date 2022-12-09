@@ -3,9 +3,11 @@
 <head>
     <title>Login</title>
     <link href="/static/css/style.css" rel="stylesheet" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="/static/js/auth.js"></script>
     <script src="/static/js/httpRequest.js"></script>
-
+    <script src="/static/js/coreData.js" type="module">
+    </script>
 </head>
 
 <header>
@@ -13,10 +15,14 @@
         <logo-container>
             <logo>LOGO HERE</logo>
         </logo-container>
-        <login-container>
-            <a href="/api/logout?redirect=/">logout</a>
-            <a href="/login">login</a>
-            <a href="/signup">sign up</a>
+        <login-container id="loginCheck">
+            <span v-if="isLoggedIn">
+                <a :href="logout">Logout</a>
+            </span>
+            <span v-else>
+                <a href="/register">Register</a> |
+                <a href="/login">Login</a>
+            </span>
         </login-container>
     </header-container>
     <nav>
