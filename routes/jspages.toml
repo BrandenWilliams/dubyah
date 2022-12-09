@@ -25,3 +25,10 @@ httpPath = "/signup"
 handlers = [
    "fileserver.ServeFile(./public_html/signup.html)"
 ]
+
+[[route]]
+group = "javaScriptPages"
+httpPath = "/taskManagement"
+handlers = [
+   "fileserver.ServeFile(./public_html/taskListVue.html)"
+]
